@@ -7,7 +7,6 @@ fun main() {
         val gridNumbersTouchingSymbols = gridNumbers.filter { it.touchesSymbols(symbolBoundaries) }
         val gridNumbersNotTouchingSymbols = gridNumbers.filter { !it.touchesSymbols(symbolBoundaries) }
 
-        println(gridNumbersTouchingSymbols.takeLast(3))
         return gridNumbersTouchingSymbols.sumOf { it.value }
     }
 
@@ -55,4 +54,4 @@ fun String.symbolCoords(row: Int) : List<Pair<Int, Int>> =
 fun Pair<Int, Int>.boundary() : List<Pair<Int, Int>> =
     listOf(first-1 to second-1, first-1 to second, first-1 to second+1) +
     listOf(first   to second-1,                    first   to second+1) +
-    listOf(first+1 to second-1, first+1 to second, first-1 to second+1)
+    listOf(first+1 to second-1, first+1 to second, first+1 to second+1)
