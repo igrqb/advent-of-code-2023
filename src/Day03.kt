@@ -11,14 +11,25 @@ fun main() {
     }
 
     fun part2(input: List<String>): Int {
-        return 0
+        val gridNumbers = input.flatMapIndexed { index: Int, s: String -> s.toGridNumbers(index) }
+        val gearCoords = input.flatMapIndexed { index: Int, s: String -> s.gearCoords(index) }
+
+        val gridNumbersTouchingGears = gearCoords.map {
+            val thisGearBoundary = it.boundary().toSet()
+            gridNumbers.filter { gn -> gn.touchesSymbols(thisGearBoundary) }
+        }
+
+        val gearPairs = gridNumbersTouchingGears.filter { it.size == 2 }
+
+        val gearRatios = gearPairs.map { it[0].value * it[1].value }
+
+        return gearRatios.sum()
     }
 
     // test if implementation meets criteria from the description, like:
     val testInput = readInput("Day03_test")
     check(part1(testInput) == 4361)
-//    val testInput2 = readInput("Day02_test")
-//    check(part2(testInput2) == 2286)
+    check(part2(testInput) == 467835)
 
     val input = readInput("Day03")
     part1(input).println()
@@ -55,3 +66,8 @@ fun Pair<Int, Int>.boundary() : List<Pair<Int, Int>> =
     listOf(first-1 to second-1, first-1 to second, first-1 to second+1) +
     listOf(first   to second-1,                    first   to second+1) +
     listOf(first+1 to second-1, first+1 to second, first+1 to second+1)
+
+fun String.gearCoords(row: Int) : List<Pair<Int, Int>> =
+    this.mapIndexed { index, c ->  index to c }
+        .filter { it.second == '*' }
+        .map { row to it.first }
