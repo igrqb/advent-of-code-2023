@@ -10,6 +10,10 @@ If you're stuck with Kotlin-specific questions or anything related to this templ
 - [Kotlin Slack][slack]
 - Template [issue tracker][issues]
 
+NOTE: please feel free to look at for personal educational purposes.
+
+Licence is NOT granted for AI learning purposes (ChatGPT, Gemini etc.)
+
 
 [^aoc]:
     [Advent of Code][aoc] – An annual event of Christmas-oriented programming challenges started December 2015.
